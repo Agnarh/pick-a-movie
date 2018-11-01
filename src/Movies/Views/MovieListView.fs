@@ -9,10 +9,15 @@ open Movies.Types
 let movieNameView movie dispatch =
     if movie.IsEditing then
         input [
-            Value movie.Name
+            DefaultValue movie.Name
             AutoFocus true
-            OnChange (fun ev -> EditMovieName (movie.Id, !!ev.target?value) |> dispatch)
-            OnBlur (fun _ -> ToggleEditMovie (movie.Id, false) |> dispatch)
+            OnBlur (fun ev -> 
+                let newName = !!ev.target?value
+                if not (System.String.IsNullOrEmpty newName) then
+                    EditMovieName (movie.Id, newName) |> dispatch
+                else
+                    ()
+                ToggleEditMovie (movie.Id, false) |> dispatch)
         ]
     else
         str movie.Name
