@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Movies/Types.fs" />
+    <Compile Include="Movies/State.fs" />
+    <Compile Include="Movies/Views/InputMovieView.fs" />
+    <Compile Include="Movies/Views/MovieListView.fs" />
+    <Compile Include="Movies/Views/PickMovieView.fs" />
+    <Compile Include="Movies/View.fs" />
+    <Compile Include="App.fs" />
+  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>
