@@ -47,4 +47,25 @@ let update action state =
         { state with PickedMovie = Some movie }
     | ChangeField descr ->
         { state with Field = descr }
-    | ToggleEditMovie (id, isEditing) -> state
+    | ToggleEditMovie (id, isEditing) -> 
+        { state with 
+            MovieList = state.MovieList |> List.map (fun movie ->
+                if movie.Id = id then
+                    { movie with IsEditing = isEditing }
+                else 
+                    movie)}
+    | EditMovieName (id, name) ->
+        { state with 
+            MovieList = 
+                state.MovieList
+                |> List.map (fun movie ->
+                    if movie.Id = id then
+                        { movie with Name = name }
+                    else 
+                        movie)
+            PickedMovie = 
+                match state.PickedMovie with
+                | Some movie when movie.Id = id -> Some { movie with Name = name }
+                | Some movie -> Some movie
+                | None -> None
+        }

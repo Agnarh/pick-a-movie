@@ -10,11 +10,23 @@ let movieNameView movie dispatch =
     if movie.IsEditing then
         input [
             Value movie.Name
-            // OnChange (fun ev -> EditMovieName (movie.Id, !!ev.target?value) |> dispatch)
-            // OnBlur (fun _ -> ToggleEditMovie (movie.Id, false) |> dispatch)
+            AutoFocus true
+            OnChange (fun ev -> EditMovieName (movie.Id, !!ev.target?value) |> dispatch)
+            OnBlur (fun _ -> ToggleEditMovie (movie.Id, false) |> dispatch)
         ]
     else
         str movie.Name
+
+let editIconView movie dispatch =
+    if movie.IsEditing then
+        div [] []
+    else
+        div [
+            ClassName "btn btn-sm"
+            OnClick (fun _ -> 
+                let payload = (movie.Id, not movie.IsEditing)
+                ToggleEditMovie payload |> dispatch)
+        ] [ span [ ClassName "fas fa-edit"] [] ]
 
 let movieView dispatch movie =
     li [ ClassName "list-group-item" ] [
@@ -24,12 +36,7 @@ let movieView dispatch movie =
             ]
             div [ ClassName "col-4" ] [
                 div [ ClassName "row justify-content-end" ] [
-                    div [
-                        ClassName "btn btn-sm"
-                        OnClick (fun _ -> 
-                            let payload = (movie.Id, not movie.IsEditing)
-                            ToggleEditMovie payload |> dispatch)
-                    ] [ span [ ClassName "fas fa-edit"] [] ]
+                    editIconView movie dispatch
                     div [
                         ClassName "btn btn-sm"
                         OnClick (fun _ -> DeleteMovie movie.Id |> dispatch)

@@ -21,3 +21,4 @@ type Actions =
     | PickMovie of MovieId
     | ChangeField of string
     | ToggleEditMovie of MovieId * bool
+    | EditMovieName of MovieId * string
