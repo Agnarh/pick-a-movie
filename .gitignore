@@ -1,3 +1,22 @@
+# F#
+.fake/
+packages/
+paket-files/
+build/
+public/
+obj
+bin
+out
+
+.vs
+.vscode/
+
+# Ignore production files generated from webpack
+
+*.nupkg
+temp
+.ionide
+
 # Logs
 logs
 *.log
