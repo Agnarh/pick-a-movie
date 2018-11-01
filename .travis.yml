@@ -1,8 +1,15 @@
 language: fsharp
 install:
-  - yarn install
-  - cd src
-  - dotnet restore
+- yarn install
+- cd src
+- dotnet restore
 script:
-  - cd src
-  - dotnet fable yarn-run build
+- cd src
+- dotnet fable yarn-run build
+deploy:
+  provider: heroku
+  api_key:
+    secure: GfV1+ktp8p5TC2pkPTiHc9aWoBvbojw7O6R3lSDk0ilCdvkBzQwUIGRBM5olxC8U3JNgo614N0Fuae9f+Oxu1KgaNfjTEOxH041cGmnkSrYUw2iuPcYySJRXvo2Rtx53SGAuADGHB44ImDSk3xW/29L6H8ZuFYGKl6Gb+GeLOC+zwW/+pUNlSu9rdTTbwiJMlFhyrIsDoq6G3R9eXjvL5o/Zn+BX1p6nHr2EICZ6ukZ9n6SLChcMe0YghQOg/LZq17TvGi+VS5OueNtWBBwYac5DJLVf5rE26gdjclDbIefBO3rCMohNdfTI1GUsNx/1RCrRquqy51gRAo7tfuhX5HNC37wN5oOFc098COMxZd3c6GhdUxfjyYFKVAfjFjsdvFoumlLfLxTIGm9a/ePqojsNxVSw2XYG4Pp7cVQ477mHwoQKtTjjnCk2ufFzSno04/36rAfTcfAxnkhaIVAK23b/RbDxMMZFc6Qjd9FVaMqqR9i0dpIt+heiGHRKMzQ6kquijNrTnpfwv8j2JwnvieSVmYPM5sxnSfglF2M3Z8jmkgoxjqFL/VV/eVcl/HfGbObzflncxGP8vDbQWnwAJvEgf4+bllLy1mzeFj54tQ0DM+GrR2KJ42qlTsD+LvO8fP8kpFry/fvQ+tSm9PRYOf3mo9Z2DM2RXoEQ5SYNDCQ=
+  app: pick-a-movie
+  on:
+    repo: Agnarh/pick-a-movie
