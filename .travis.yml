@@ -1,4 +1,6 @@
 language: fsharp
+mono: none
+dotnet: 2.1.403
 install:
   - yarn install
   - cd src
