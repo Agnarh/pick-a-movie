@@ -5,5 +5,4 @@ install:
   - cd src
   - dotnet restore
 script:
-  - cd src
   - dotnet fable yarn-run build
