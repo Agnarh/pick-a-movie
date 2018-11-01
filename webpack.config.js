@@ -24,8 +24,7 @@ console.log("Bundling for " + (isProduction ? "production" : "development") + ".
 module.exports = {
     devtool: isProduction ? undefined : "source-map",
     entry: {
-        app: resolve('./src/react.fsproj'),
-        styles: resolve('./scss/main.scss')
+        app: resolve('./src/react.fsproj')
     },
     output: {
         filename: '[name].js',

@@ -1,4 +1,5 @@
 public/app.js*
+public/styles.css
 
 # Node
 node_modules/
