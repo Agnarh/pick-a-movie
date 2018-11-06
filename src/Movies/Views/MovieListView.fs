@@ -6,21 +6,28 @@ open Fable.Core.JsInterop
 
 open Movies.Types
 
+let newMovieNameHandler id dispatch newName =
+    if not (System.String.IsNullOrEmpty newName) then
+        EditMovieName (id, newName) |> dispatch
+    else
+        ()
+    ToggleEditMovie (id, false) |> dispatch
+
 let movieNameView movie dispatch =
+    let handler = newMovieNameHandler movie.Id dispatch
+
     if movie.IsEditing then
         input [
             DefaultValue movie.Name
             AutoFocus true
-            OnBlur (fun ev -> 
-                let newName = !!ev.target?value
-                if not (System.String.IsNullOrEmpty newName) then
-                    EditMovieName (movie.Id, newName) |> dispatch
-                else
-                    ()
-                ToggleEditMovie (movie.Id, false) |> dispatch)
+            OnBlur (fun ev -> !!ev.target?value |> handler)
+            OnKeyDown (fun ev ->
+                match ev.keyCode with
+                | 13. -> !!ev.target?value |> handler
+                | _ -> ())
         ]
     else
-        str movie.Name
+        span [ ClassName "movie-item-name" ] [ str movie.Name ]
 
 let editIconView movie dispatch =
     if movie.IsEditing then

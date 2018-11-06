@@ -1,14 +1,15 @@
 module Movies.State
 
 open Types
+open Movies.DataAccess
 
-let newMovie name id = {
+let private newMovie name id = {
     Name = name;
     Id = id;
     IsEditing = false;
 }
 
-let emptyState = {
+let private emptyState = {
     CurrentId = 0;
     Field = "";
     IsMovieExists = false;
@@ -16,11 +17,14 @@ let emptyState = {
     PickedMovie = None;
 }
 
-let initState () = emptyState
+let initState state =
+    match state with
+    | Some savedState -> savedState
+    | None -> emptyState
 
-let isTargetMovie id movie = movie.Id = id
+let private isTargetMovie id movie = movie.Id = id
 
-let update action state =
+let private update action state =
     match action with
     | AddMovie ->
         if not state.IsMovieExists then
@@ -71,3 +75,16 @@ let update action state =
                 | Some movie -> Some movie
                 | None -> None
         }
+
+let private performSaveState action state =
+    match action with
+    | AddMovie
+    | DeleteMovie _
+    | PickMovie _
+    | EditMovieName _ -> saveState state
+    | _ -> ()
+    state
+
+let updateState action state = 
+    update action state
+    |> performSaveState action

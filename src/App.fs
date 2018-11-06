@@ -8,9 +8,10 @@ importAll "../scss/main.scss"
 
 open Movies.State
 open Movies.View
+open Movies.DataAccess
 
 // App
-Program.mkSimple initState update root
+Program.mkSimple (loadState >> initState) updateState root
 #if DEBUG
 |> Program.withConsoleTrace
 #endif
