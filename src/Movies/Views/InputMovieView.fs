@@ -21,6 +21,7 @@ let inputMovieView state dispatch =
             ]
             div [ ClassName "input-group-append" ] [
                 button [
+                    Disabled state.IsMovieExists
                     ClassName "btn btn-outline-secondary"
                     OnClick (fun _ -> AddMovie |> dispatch)
                 ] [

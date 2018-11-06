@@ -11,6 +11,7 @@ type Movie = {
 type State = {
     CurrentId: int;
     Field: string;
+    IsMovieExists: bool;
     MovieList: Movie list;
     PickedMovie: Movie option;
 }
