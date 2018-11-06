@@ -11,6 +11,8 @@ open Movies.View
 
 // App
 Program.mkSimple initState update root
+#if DEBUG
 |> Program.withConsoleTrace
+#endif
 |> Program.withReact "app"
 |> Program.run
