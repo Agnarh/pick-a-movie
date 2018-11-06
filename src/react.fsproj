@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Movies/Types.fs" />
+    <Compile Include="Movies/DataAccess.fs" />
     <Compile Include="Movies/State.fs" />
     <Compile Include="Movies/Views/InputMovieView.fs" />
     <Compile Include="Movies/Views/MovieListView.fs" />
